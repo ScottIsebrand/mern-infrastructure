@@ -1,13 +1,17 @@
+// When the user browses to the app's URL, the Express server always delivers the static public/index.html page, which requests the scriipts that contain the React app; then the code in this module runs & the React app renders for the first time.
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </React.StrictMode>
 );
 
