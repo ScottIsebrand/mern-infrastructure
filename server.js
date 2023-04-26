@@ -5,6 +5,7 @@ const express = require('express');
 const path = require('path'); // node module
 const favicon = require('serve-favicon');
 const logger = require('morgan');
+const ensureLoggedIn = require('./config/ensureLoggedIn');
 
 const app = express();
 // Development port : 3001. Configure to use port 3001 instead of 3000 during development to avoid collision with React's dev server
@@ -26,7 +27,8 @@ app.use(require('./config/checkToken'));
 // * ALL OTHER ROUTES
 // Match incoming requests.. Everything that comes in here goes to api/users.js
 app.use('/api/users', require('./routes/api/users'));
-
+app.use('/api/items', ensureLoggedIn, require('./routes/api/items'));
+app.use('/api/orders', ensureLoggedIn, require('./routes/api/orders'));
 // Put API routes here, before the "catch all" route
 
 // The following "catch all" route (note the *) is necessary to return the index.html on ALL non-AJAX requests
